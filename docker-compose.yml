@@ -1,0 +1,68 @@
+version: '3.6'
+
+services:
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    depends_on:
+      - adminer
+    environment:
+      POSTGRES_USER: 1nflu3nc3r
+      POSTGRES_PASSWORD: v3r1h4rd
+      POSTGRES_DB: social_network
+
+
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    volumes:
+      - .redis:/bitnami/redis/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  web:
+    build:
+      context: ./social_network
+      dockerfile: Dockerfile
+      network: tradecore_task_network
+    volumes:
+      - ./social_network:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+#    command: ["./wait_for_postgres.sh", "db:5432", "-t", "15"]
+
+
+#  test:
+#    build:
+#      context: ./social_network
+#      dockerfile: ./Dockerfile
+#    volumes:
+#      - ./social_network:/code
+#    depends_on:
+#      - db
+#      - redis
+
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  default:
+    name: tradecore_task_network
