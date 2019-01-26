@@ -24,7 +24,7 @@ SECRET_KEY = '(a3mrtmxo7%4y&=_n3@m1+^oua^5y4uqr3iw_ovptpvzyg3ge)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0']
 
 AUTH_USER_MODEL = 'users.NetworkUser'
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     # our apps
     'core',
     'users',
