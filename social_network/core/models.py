@@ -15,7 +15,10 @@ class Post(AbstractModel):
     title = models.CharField(max_length=128, null=False, blank=False)
     content = models.TextField(max_length=1000, null=False, blank=False)
     likers = models.ManyToManyField(get_user_model(), through='Like', related_name='likers')
-    like_count = models.PositiveIntegerField(default=0)
+
+    @property
+    def like_count(self):
+        return self.like_set.count()
 
 
 class Like(AbstractModel):
