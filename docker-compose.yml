@@ -46,7 +46,7 @@ services:
       - db
       - redis
 #    command: ["./wait_for_postgres.sh", "db:5432", "-t", "15"]
-
+    command: ["./run_web.sh"]
 
 #  test:
 #    build:
