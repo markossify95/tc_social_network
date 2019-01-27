@@ -7,7 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
 from users.filters import UserFilter
-from .serializers import UserSerializer
+from .serializers import UserSerializer, DetailedUserSerializer
 
 
 class UserPagination(PageNumberPagination):
@@ -24,12 +24,9 @@ class CreateUserView(CreateAPIView, GenericViewSet):
     serializer_class = UserSerializer
 
 
-class UsersViewSet(mixins.ListModelMixin, GenericViewSet):
-    permission_classes = [
-        permissions.AllowAny
-    ]
+class UsersViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet):
     queryset = get_user_model().objects.all()
-    serializer_class = UserSerializer
+    serializer_class = DetailedUserSerializer
     pagination_class = UserPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = UserFilter

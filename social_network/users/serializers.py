@@ -29,3 +29,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
             "likes_count",)
+
+
+class DetailedUserSerializer(serializers.ModelSerializer):
+    from core.serializers import SkinnyPostSerializer
+
+    posts = SkinnyPostSerializer(many=True, source='post_set')
+
+    class Meta:
+        model = UserModel
+        fields = (
+            "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
+            "likes_count", "posts")
