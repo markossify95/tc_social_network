@@ -35,6 +35,8 @@ services:
       context: ./social_network
       dockerfile: Dockerfile
       network: tradecore_task_network
+    environment:
+      - CLEARBIT_KEY=sk_a7472162ee4e10f3ca4a1f62affdd276
     volumes:
       - ./social_network:/code
     ports:
@@ -45,7 +47,7 @@ services:
     links:
       - db
       - redis
-#    command: ["./wait_for_postgres.sh", "db:5432", "-t", "15"]
+    #    command: ["./wait_for_postgres.sh", "db:5432", "-t", "15"]
     command: ["./run_web.sh"]
 
 #  test:

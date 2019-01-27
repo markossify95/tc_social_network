@@ -76,6 +76,11 @@ TEMPLATES = [
 
 # HUNTER email validator settings
 HUNTER_API_KEY = '4704cc77d0a4929cd1d651b4f38069077e90ba07'
+HUNTER_VALIDATION_TRESHOLD = 60
+
+# clearbit client settings (key set in env)
+# CLEARBIT_API_KEY = 'sk_a7472162ee4e10f3ca4a1f62affdd276'
+CLEARBIT_RETRIES = 5
 
 # DRF settings
 REST_FRAMEWORK = {
@@ -87,8 +92,15 @@ REST_FRAMEWORK = {
     )
 }
 
-# JWT settings
+# CELERY settings
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Belgrade'
 
+# JWT settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
