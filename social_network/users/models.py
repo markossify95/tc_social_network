@@ -34,3 +34,11 @@ class NetworkUser(AbstractUser):
     @property
     def like_count(self):
         return self.like_set.count()
+
+    @property
+    def has_unpopular_posts(self):
+        for p in self.post_set.all():
+            if p.like_count == 0:
+                return True
+
+        return False

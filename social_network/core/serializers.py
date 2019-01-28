@@ -41,7 +41,8 @@ class PostField(serializers.RelatedField):
 class PostSerializer(PasteUserMixin, serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     like_count = serializers.IntegerField(read_only=True)
-    likers = UserSerializer(read_only=True, many=True)
+    likers = serializers.HyperlinkedRelatedField(read_only=True, many=True, view_name='users-detail')
+    # likers = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
 
     class Meta:
         model = Post

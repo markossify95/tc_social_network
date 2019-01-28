@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = (
             "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
-            "like_count",)
+            "like_count", "has_unpopular_posts")
 
 
 class DetailedUserSerializer(serializers.ModelSerializer):
@@ -38,4 +38,4 @@ class DetailedUserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = (
             "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
-            "like_count", "posts")
+            "like_count", "posts", "has_unpopular_posts")
