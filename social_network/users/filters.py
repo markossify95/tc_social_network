@@ -28,7 +28,7 @@ class OrderByPostsCountFilter(filters.OrderingFilter):
 
 
 class UserFilter(filters.FilterSet):
-    likes__lt = filters.NumberFilter(method='filter_by_like_count')
+    likes__lt = filters.NumberFilter(method='filter_by_like_count', label='max number of likes (excluding)')
     order_by = OrderByPostsCountFilter()
 
     def filter_by_like_count(self, queryset, name, value):

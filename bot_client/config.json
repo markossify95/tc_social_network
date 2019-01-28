@@ -1,0 +1,10 @@
+{
+  "hunter_api_key": "4704cc77d0a4929cd1d651b4f38069077e90ba07",
+  "network_host": "http://localhost",
+  "network_port": 8000,
+  "number_of_users": 5,
+  "max_number_of_posts": 10,
+  "max_number_of_likes": 10,
+  "default_password": "v3r1h4rd",
+  "post_content": "This took longer than expected! :)"
+}

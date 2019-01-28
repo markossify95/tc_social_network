@@ -32,5 +32,5 @@ class NetworkUser(AbstractUser):
                               help_text="User's github account name.")
 
     @property
-    def likes_count(self):
+    def like_count(self):
         return self.like_set.count()

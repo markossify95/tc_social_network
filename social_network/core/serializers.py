@@ -50,11 +50,10 @@ class PostSerializer(PasteUserMixin, serializers.ModelSerializer):
 
 class SkinnyPostSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
-    likers = UserSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'likers', 'like_count',)
+        fields = ('id', 'user', 'title', 'content', 'likers', 'like_count',)
 
 
 class LikeSerializer(PasteUserMixin, serializers.ModelSerializer):

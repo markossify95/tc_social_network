@@ -22,7 +22,9 @@ class PostViewSet(mixins.CreateModelMixin,
                   viewsets.GenericViewSet):
     serializer_class = PostSerializer
     pagination_class = PostPagination
-    queryset = Post.objects.all()
+
+    def get_queryset(self):
+        return Post.objects.all().order_by('-id')
 
     @action(detail=True, methods=['POST', 'DELETE'], url_name="like", url_path="like")
     def toggle_like(self, request, pk=None):

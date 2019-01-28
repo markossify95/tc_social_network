@@ -20,7 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
         )
         user.set_password(password)
         user.save()
-        print("Starting the task for user with id:", user.id)
         fetch_user_data.delay(user.id)
         return user
 
@@ -28,16 +27,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = (
             "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
-            "likes_count",)
+            "like_count",)
 
 
 class DetailedUserSerializer(serializers.ModelSerializer):
     from core.serializers import SkinnyPostSerializer
-
     posts = SkinnyPostSerializer(many=True, source='post_set')
 
     class Meta:
         model = UserModel
         fields = (
             "id", "username", "password", "email", "full_name", "bio", "city", "state", "github", "website",
-            "likes_count", "posts")
+            "like_count", "posts")

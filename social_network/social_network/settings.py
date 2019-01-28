@@ -81,15 +81,17 @@ HUNTER_VALIDATION_TRESHOLD = 60
 
 # clearbit client settings (key set in env)
 # CLEARBIT_API_KEY = 'sk_a7472162ee4e10f3ca4a1f62affdd276'
-CLEARBIT_RETRIES = 5
+CLEARBIT_RETRIES = 3
 
 # DRF settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     )
 }
 

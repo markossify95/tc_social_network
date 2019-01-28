@@ -10,11 +10,9 @@ class HunterEmailValidator:
             hunter = PyHunter(settings.HUNTER_API_KEY)
             resp_data = hunter.email_verifier(value)
         except Exception as e:
-            print("Email validation failed", e)
             message = "Failed to validate email. Please, try later."
             raise serializers.ValidationError(message)
 
         if resp_data.get('score') < settings.HUNTER_VALIDATION_TRESHOLD:
-            print("Email is invalid", resp_data)
             message = "Invalid email."
             raise serializers.ValidationError(message)
