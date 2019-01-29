@@ -6,5 +6,6 @@
   "max_number_of_posts": 10,
   "max_number_of_likes": 10,
   "default_password": "v3r1h4rd",
-  "post_content": "This took longer than expected! :)"
+  "post_content": "This took longer than expected! :)",
+  "source_domain_name": "google.com"
 }

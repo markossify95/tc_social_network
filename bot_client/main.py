@@ -1,20 +1,12 @@
-import logging
-import sys
-
-from common import config
+from common import config, get_all_users, LOGGER
+from liker import like_em_all
 from post_creator import create_posts
 from user_creator import fetch_emails, create_users
 
-LOGGER = logging.getLogger()
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-LOGGER.addHandler(handler)
 
 def run():
     LOGGER.info("fetching emails...")
-    emails = fetch_emails(domain_name='trello.com', user_count=config['number_of_users'])
+    emails = fetch_emails(domain_name=config['source_domain_name'], user_count=config['number_of_users'])
     LOGGER.info("emails fetched: {}".format(str(emails)))
 
     LOGGER.info("creating users...")
@@ -25,6 +17,10 @@ def run():
     for u in users:
         LOGGER.info("Spamming the network in name of a user {}".format(str(u)))
         create_posts(u)
+
+    users = get_all_users()  # refresh user objects to order them properly using backend
+    users = [u for u in users if u['username'] != 'admin']  # exclude the admin because of failed auth
+    like_em_all(users)
 
 
 if __name__ == '__main__':

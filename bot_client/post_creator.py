@@ -1,17 +1,9 @@
-import logging
 import random
-import sys
 
 import requests
 
-from common import obtain_token_pair, base_url, config
+from common import obtain_token_pair, base_url, config, LOGGER
 
-LOGGER = logging.getLogger()
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-LOGGER.addHandler(handler)
 
 def create_posts(user):
     access_token, refresh_token = obtain_token_pair(user['username'], config['default_password'])

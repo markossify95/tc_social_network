@@ -1,24 +1,16 @@
 import json
-import logging
-import sys
 
 import requests
 
-from common import base_url, config
+from common import base_url, config, LOGGER
 from utils import BotClientError
-
-LOGGER = logging.getLogger()
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-LOGGER.addHandler(handler)
 
 
 def fetch_emails(domain_name, user_count):
     api_key = config['hunter_api_key']
-    endpoint = "https://api.hunter.io/v2/domain-search?domain={0}&api_key={1}&limit={2}".format(domain_name, api_key,
-                                                                                                user_count)
+    endpoint = "https://api.hunter.io/v2/domain-search?domain={0}&type=personal&api_key={1}&limit={2}".format(
+        domain_name, api_key, user_count)
+
     resp = requests.get(url=endpoint)
 
     if resp.status_code != 200:
@@ -38,8 +30,6 @@ def create_users(emails):
 
     for email in emails:
         username = email.split('@')[0]
-
-        print(type(email))
 
         data = {
             'username': username,
