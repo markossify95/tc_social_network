@@ -76,7 +76,7 @@ TEMPLATES = [
 ]
 
 # HUNTER email validator settings
-HUNTER_API_KEY = '4704cc77d0a4929cd1d651b4f38069077e90ba07'
+HUNTER_API_KEY = os.environ.get('HUNTER_API_KEY')
 HUNTER_VALIDATION_TRESHOLD = 60
 
 # clearbit client settings (key set in env)

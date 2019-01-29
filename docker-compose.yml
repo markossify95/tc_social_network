@@ -37,6 +37,7 @@ services:
       network: tradecore_task_network
     environment:
       - CLEARBIT_KEY=sk_a7472162ee4e10f3ca4a1f62affdd276
+      - HUNTER_API_KEY=4704cc77d0a4929cd1d651b4f38069077e90ba07
     volumes:
       - ./social_network:/code
     ports:
